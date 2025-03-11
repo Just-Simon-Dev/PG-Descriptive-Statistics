@@ -770,14 +770,20 @@ users.age.mean()
 
 
 ```python
-users.age.value_counts().sort_index().head(1)
+age_count = users.age.value_counts()
+min_age = age_count.min()
+age_count[age_count == min_age]
 ```
 
 
 
 
     age
-    7    1
+    7     1
+    11    1
+    66    1
+    10    1
+    73    1
     Name: count, dtype: int64
 
 
