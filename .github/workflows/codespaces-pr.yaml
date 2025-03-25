@@ -17,7 +17,11 @@ jobs:
 
       - name: Create Codespace
         run: |
-          gh codespace create --repo ${{ github.repository }} --branch ${{ github.event.pull_request.head.ref }} \
-          --machine basicLinux32gb
+          gh codespace create \
+          --repo ${{ github.repository }} \
+          --branch ${{ github.event.pull_request.head.ref }} \
+          --machine basicLinux32gb \
+          --display-name PR-${{ github.event.pull_request.head.ref }} \
+          --idle-timeout "1m"
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
