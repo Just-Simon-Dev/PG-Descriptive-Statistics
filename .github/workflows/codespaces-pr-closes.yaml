@@ -1,0 +1,20 @@
+name: Delete Codespace after merge
+
+on:
+  pull_request:
+    types: [ closed ]
+
+jobs:
+  close_codespace_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+        ref: ${{ github.event.pull_request.head.ref }}
+      - name: shutdown codespace
+        run: gh codespace remove \
+          --codespace PR-${{ github.event.pull_request.head.ref }} \
+          --force
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
