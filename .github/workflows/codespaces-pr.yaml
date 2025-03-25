@@ -1,0 +1,25 @@
+name: Setup Codespace for PR
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  setup-codespace:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Codespace Environment
+        run: |
+          mkdir -p .devcontainer
+          echo "Setting up environment variables for PR..."
+          echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> .env
+          echo "BRANCH_NAME=${{ github.head_ref }}" >> .env
+
+      - name: Commit Environment Changes
+        run: |
+          git add .env
+          git commit -m "Setup environment for PR-${{ github.event.pull_request.number }}"
+          git push origin ${{ github.head_ref }}
