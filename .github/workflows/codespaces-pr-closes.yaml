@@ -13,7 +13,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
       - name: shutdown codespace
-        run: gh codespace remove \
+        run: gh codespace delete \
           --codespace PR-${{ github.event.pull_request.head.ref }} \
           --force
         env:
