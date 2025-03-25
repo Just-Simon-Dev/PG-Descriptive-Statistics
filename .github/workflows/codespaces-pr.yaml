@@ -1,25 +1,22 @@
-name: Setup Codespace for PR
+name: Create Codespace for PR
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types:
+      - opened
+      - synchronize
 
 jobs:
-  setup-codespace:
+  create-codespace:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Set up Codespace Environment
+      - name: Create Codespace
         run: |
-          mkdir -p .devcontainer
-          echo "Setting up environment variables for PR..."
-          echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> .env
-          echo "BRANCH_NAME=${{ github.head_ref }}" >> .env
-
-      - name: Commit Environment Changes
-        run: |
-          git add .env
-          git commit -m "Setup environment for PR-${{ github.event.pull_request.number }}"
-          git push origin ${{ github.head_ref }}
+          gh codespace create --repo ${{ github.repository }} --branch ${{ github.event.pull_request.head.ref }} --machine-standard
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
