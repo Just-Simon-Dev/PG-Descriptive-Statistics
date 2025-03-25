@@ -13,6 +13,18 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
       - name: shutdown codespace
-        run: gh codespace delete --codespace PR-main --force
+        run: |
+          # List all codespaces and filter by display name
+          codespace_name=$(gh codespace list --json name,displayName --jq '.[] | select(.displayName=="PR-${{ github.event.pull_request.head.ref }}") | .name')
+          
+          if [ -z "$codespace_name" ]; then
+            echo "Codespace not found!"
+            exit 1
+          fi
+          
+          echo "Found codespace name: $codespace_name"
+          
+          # Delete the codespace
+          gh codespace delete --codespace "$codespace_name" --force
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
