@@ -11,7 +11,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-        ref: ${{ github.event.pull_request.head.ref }}
+          ref: ${{ github.event.pull_request.head.ref }}
       - name: shutdown codespace
         run: gh codespace remove \
           --codespace PR-${{ github.event.pull_request.head.ref }} \
