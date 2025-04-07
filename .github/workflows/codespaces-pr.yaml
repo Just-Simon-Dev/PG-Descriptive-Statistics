@@ -17,6 +17,13 @@ jobs:
 
       - name: Create Codespace
         run: |
+          codespace_name=$(gh codespace list --json name,displayName --jq '.[] | select(.displayName=="PR-${{ github.event.pull_request.head.ref }}") | .name')
+          
+          if [! -z "$codespace_name" ]; then
+            echo "found codespace $codespace_name"
+            exit 1
+          fi
+          
           gh codespace create \
           --repo ${{ github.repository }} \
           --branch ${{ github.event.pull_request.head.ref }} \
