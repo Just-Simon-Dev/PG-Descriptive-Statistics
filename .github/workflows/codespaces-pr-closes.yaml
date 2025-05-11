@@ -1,0 +1,30 @@
+name: Delete Codespace after merge
+
+on:
+  pull_request:
+    types: [ closed ]
+
+jobs:
+  close_codespace_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - name: shutdown codespace
+        run: |
+          # List all codespaces and filter by display name
+          codespace_name=$(gh codespace list --json name,displayName --jq '.[] | select(.displayName=="PR-${{ github.event.pull_request.head.ref }}") | .name')
+          
+          if [ -z "$codespace_name" ]; then
+            echo "Codespace not found!"
+            exit 1
+          fi
+          
+          echo "Found codespace name: $codespace_name"
+          
+          # Delete the codespace
+          gh codespace delete --codespace "$codespace_name" --force
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}

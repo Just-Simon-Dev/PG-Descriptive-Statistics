@@ -1,0 +1,34 @@
+name: Create Codespace for PR
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  create-codespace:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Create Codespace
+        run: |
+          codespace_name=$(gh codespace list --json name,displayName --jq '.[] | select(.displayName=="PR-${{ github.event.pull_request.head.ref }}") | .name')
+          
+          if [! -z "$codespace_name" ]; then
+            echo "found codespace $codespace_name"
+            exit 1
+          fi
+          
+          gh codespace create \
+          --repo ${{ github.repository }} \
+          --branch ${{ github.event.pull_request.head.ref }} \
+          --machine basicLinux32gb \
+          --display-name PR-${{ github.event.pull_request.head.ref }} \
+          --idle-timeout "6m"
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
