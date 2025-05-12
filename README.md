@@ -6,7 +6,7 @@
 # reports:
 
 ## report 1
-- ### [report 1 - pipes](https://github.com/Just-Simon-Dev/PG-Descriptive-Statistics/blob/main/reports-main/Report1.md)
+- ### [report 1 - pipes](https://github.com/Just-Simon-Dev/PG-Descriptive-Statistics/blob/main/reports-1/Report1.md)
 
 ## report 2
 - ### [report 2 - Exercise 1](https://github.com/Just-Simon-Dev/PG-Descriptive-Statistics/blob/main/report-2/Exercise1.md)
