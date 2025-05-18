@@ -40,15 +40,15 @@ df_pokemon["Type 1"].value_counts()
     Bug          69
     Psychic      57
     Fire         52
-    Electric     44
     Rock         44
-    Dragon       32
+    Electric     44
     Ground       32
     Ghost        32
+    Dragon       32
     Dark         31
     Poison       28
-    Steel        27
     Fighting     27
+    Steel        27
     Ice          24
     Fairy        17
     Flying        4
@@ -203,42 +203,47 @@ Answer the following questions by choosing **one correct answer**. You will find
 
 #### 1. Which scale **enables ordering of data**, but **does not have equal spacing**?
 - A) Nominal  
-- B) Ordinal  
+- B) **Ordinal**
 - C) Interval  
 - D) Ratio  
 
+#### correct answer: B
 ---
 
 #### 2. An example of a variable on the **nominal scale** is:
 - A) Temperature in °C  
 - B) Height  
-- C) Type of Pokémon (`fire`, `grass`, `water`)  
+- C) **Type of Pokémon (`fire`, `grass`, `water`)**
 - D) Satisfaction level (`low`, `medium`, `high`).  
 
+#### correct answer: C
 ---
 
 #### 3. Which scale **does not have absolute zero**, but has **equal spacing**?
 - A) Ratio  
 - B) Ordinal  
-- C) Interval  
+- C) **Interval**
 - D) Nominal  
 
+#### correct answer: C
 ---
 
 #### 4. What operations are **allowed** on variables **on an ordinal scale**?
 - A) Mean and standard deviation  
 - B) Mode and Pearson correlation  
-- C) Median and rank tests  
+- C) **Median and rank tests**
 - D) Quotients and logarithms  
 
+#### correct answer: C
 ---
 
 #### 5. The variable `“class”` in the Titanic set (`First`, `Second`, `Third`) is an example:
 - A) Nominal scale  
 - B) Ratio scale  
 - C) Interval scale  
-- D) Ordinal scale  
+- D) **Ordinal scale**
 
+#### correct answer: D
 ---
 
 # Descriptive statistics
@@ -439,8 +444,15 @@ How to calculate the mean life expectancy for EUROPEan countries (2007).
 
 
 ```python
-### Your code here
+df_gapminder[(df_gapminder['continent'] == 'Europe') & (df_gapminder['year'] == 2007)]['life_exp'].mean()
 ```
+
+
+
+
+    np.float64(77.6486)
+
+
 
 #### *Average* and skewness
 
@@ -459,7 +471,7 @@ plt.axvline(df_gapminder['gdp_cap'].mean(), linestyle = "dotted");
 
 
     
-![png](Exercise8_files/Exercise8_32_0.png)
+![png](Exercise8_files/output_32_0.png)
     
 
 
@@ -469,7 +481,7 @@ Is it possible to calculate the average of the column “continent”? Why or wh
 
 
 ```python
-### Your comment here
+### No, it's not possible to calculate the average value of this column, because this column contains categorical data not numbers
 ```
 
 #### Your turn
@@ -482,8 +494,15 @@ What is their sum?
 
 ```python
 numbers = np.array([1, 2, 3, 4])
-### Your code here
+sum(numbers - numbers.mean()) # it will be 0
 ```
+
+
+
+
+    np.float64(0.0)
+
+
 
 #### Summary of the first part
 
@@ -528,7 +547,7 @@ plt.axvline(df_gapminder['gdp_cap'].median(), linestyle = "dashed", color = "red
 
 
     
-![png](Exercise8_files/Exercise8_41_0.png)
+![png](Exercise8_files/output_41_0.png)
     
 
 
@@ -538,7 +557,7 @@ Is it possible to calculate the median of the column “continent”? Why or why
 
 
 ```python
-### Your comment here
+### No, it's not possible to calculate the median value of this column, because we can say that mode is something like median for categorical data, so it is not possible for median to contain categorical data only numbers
 ```
 
 ### *Mode*
@@ -778,6 +797,7 @@ print(f"P95 (95%): {p95}")
 
 ```python
 # Create boxplot
+import matplotlib.pyplot as plt
 fig, ax = plt.subplots(figsize=(8, 6))
 sns.boxplot(data=mydata, ax=ax, color='lightblue', width=0.3)
 
@@ -811,7 +831,7 @@ plt.show()
 
 
     
-![png](Exercise8_files/Exercise8_53_0.png)
+![png](Exercise8_files/output_53_0.png)
     
 
 
@@ -820,6 +840,32 @@ plt.show()
 Try to change the boxplot into the violin plot (or add it). 
 
 Looking at the aforementioned quantile results and the box plot, try to interpret these measures. 
+
+
+```python
+fig, ax = plt.subplots(figsize=(8, 6))
+sns.violinplot(data=mydata, ax=ax, color='lightblue', width=0.3)
+ax.set_title('Violinplot of mydata')
+plt.show()
+
+'''
+A violin plot shows a density of the shape, it will be the widest around 12, where is median, and it will be
+more slim somewhere 3 and 21, the shape is very smooth
+'''
+```
+
+
+    
+![png](Exercise8_files/output_55_0.png)
+    
+
+
+
+
+
+    '\nA violin plot shows a density of the shape, it will be the widest around 12, where is median, and it will be\nmore slim somewhere 3 and 21, the shape is very smooth\n'
+
+
 
 ## Variability
 
@@ -846,7 +892,7 @@ axes[1].set_title("Higher variance");
 
 
     
-![png](Exercise8_files/Exercise8_57_0.png)
+![png](Exercise8_files/output_58_0.png)
     
 
 
@@ -872,7 +918,7 @@ d1.max() - d1.min()
 
 
 
-    np.float64(6.079780435921255)
+    np.float64(6.335222552325273)
 
 
 
@@ -884,7 +930,7 @@ d2.max() - d2.min()
 
 
 
-    np.float64(36.667970389001795)
+    np.float64(33.651122029559616)
 
 
 
@@ -909,7 +955,7 @@ q3 - q1
 
 
 
-    np.float64(1.3435224194780124)
+    np.float64(1.3440822574708275)
 
 
 
@@ -923,7 +969,7 @@ q3 - q1
 
 
 
-    np.float64(7.370569016402993)
+    np.float64(6.707943544193627)
 
 
 
@@ -943,7 +989,7 @@ $$
 
 where:
 	- $n$ - the number of elements in the sample
-	- $bar{x}$ - the arithmetic mean of the sample
+	- $\bar{x}$ - the arithmetic mean of the sample
 
 What to keep in mind:
 
@@ -1005,7 +1051,7 @@ d1.std()
 
 
 
-    np.float64(1.0308316664437995)
+    np.float64(0.9733880922271481)
 
 
 
@@ -1018,7 +1064,7 @@ d1.std(ddof = 1)
 
 
 
-    np.float64(1.0313474691613134)
+    np.float64(0.9738751515982464)
 
 
 
@@ -1053,6 +1099,58 @@ print(f"CV (scipy): {cv_sample:.2f}%")
     Sample variance (scipy): 4.571428571428571
     Sample sd (scipy): 2.138089935299395
     CV (scipy): 42.76%
+
+
+## Interquartile deviation
+
+Interquartile deviation (sometimes called the semi-interquartile range) is defined as half of the interquartile range:
+
+$$ \text{IQR deviation} = \frac{Q3 - Q1}{2} $$
+
+This value shows the average distance from the median to the quartiles and is a robust measure of variability.
+
+- A small interquartile deviation means the middle 50% of the data are close to the median.
+- A large interquartile deviation means the middle 50% are more spread out.
+
+It is less sensitive to outliers than the standard deviation or range!
+
+# Your turn!
+
+Calculate STD and CV for the SPEED of LEGENDARY and NOT LEGENDARY pokemons. What is the IQR deviation? 
+
+
+```python
+# Legendary pokemons
+
+X = df_pokemon[df_pokemon['Legendary'] == True]['Speed']
+
+Q1 = np.percentile(X, 25)
+Q3 = np.percentile(X, 75)
+IQR = Q3 - Q1
+
+print("std value of speed for Legendary Pokemon", stats.tstd(X))
+print("cv value of speed for Legendary Pokemon", (stats.tstd(X) / mean) * 100)
+print("iqr of speed for Legendary Pokemon", IQR)
+
+# Not legendary pokemons
+
+X = df_pokemon[df_pokemon['Legendary'] == False]['Speed']
+
+Q1 = np.percentile(X, 25)
+Q3 = np.percentile(X, 75)
+IQR = Q3 - Q1
+
+print("std value of speed for Non-Legendary Pokemon", stats.tstd(X))
+print("cv value of speed for Non-Legendary Pokemon", (stats.tstd(X) / mean) * 100)
+print("iqr of speed for Non-Legendary Pokemon", IQR)
+```
+
+    std value of speed for Legendary Pokemon 22.952323076660118
+    cv value of speed for Legendary Pokemon 459.0464615332023
+    iqr of speed for Legendary Pokemon 20.0
+    std value of speed for Non-Legendary Pokemon 27.84303788658195
+    cv value of speed for Non-Legendary Pokemon 556.8607577316391
+    iqr of speed for Non-Legendary Pokemon 40.0
 
 
 ## Measures of the shape of the distribution
@@ -1131,8 +1229,31 @@ Try to interpret the above-mentioned result and calculate example slant ratios f
 
 
 ```python
-# Your comment here
+# The value of skewness of X is positive ( > 0 ) so that means that it is right skewness
+
+legendary_speed = df_pokemon[df_pokemon['Legendary'] == True]['Speed']
+skewness_legendary = skew(legendary_speed)
+print(f"Skewness of legendary speed: {skewness_legendary:.4f}")
+
+non_legendary_speed = df_pokemon[df_pokemon['Legendary'] == False]['Speed']
+skewness_non_legendary = skew(non_legendary_speed)
+print(f"Skewness of non-legendary speed: {skewness_non_legendary:.4f}")
+
+generation_1_speed = df_pokemon[df_pokemon['Generation'] == 1]['Speed']
+skewness_generation_1 = skew(generation_1_speed)
+print(f"Skewness of generation 1 speed: {skewness_generation_1:.4f}")
+
+generation_2_speed = df_pokemon[df_pokemon['Generation'] == 2]['Speed']
+skewness_generation_2 = skew(generation_2_speed)
+print(f"Skewness of generation 2 speed: {skewness_generation_2:.4f}")
+
 ```
+
+    Skewness of legendary speed: 0.4321
+    Skewness of non-legendary speed: 0.3893
+    Skewness of generation 1 speed: 0.3883
+    Skewness of generation 2 speed: 0.1824
+
 
 ### Interquartile Skewness
 
@@ -1152,8 +1273,17 @@ Try to calculate the IQR Skewness coefficient for the sample data:
 
 ```python
 mydata = [3, 7, 8, 5, 12, 14, 21, 13, 18]
-# Your code here
+Q3 = np.percentile(mydata, 75)
+Q1 = np.percentile(mydata, 25)
+mean = np.mean(mydata)
+median = np.median(mydata)
+
+IQR_skewness = (Q3 - median) - (median - Q1) / (Q3 - Q1)
+print("IQR skewness coefficient for mydata:", IQR_skewness)
 ```
+
+    IQR skewness coefficient for mydata: 1.2857142857142856
+
 
 ## Kurtosis
 
@@ -1171,7 +1301,7 @@ $$
 $$
 
 $$
-\text{Normalized kurtozis} = \text{Kurtozis} - 3
+\text{Normalized kurtosis} = \text{Kurtosis} - 3
 $$
 
 #### Reference range for kurtosis
@@ -1225,13 +1355,14 @@ print("Regular Kurtosis:", regular_kurt)
 The formula for IQR Kurtosis is:
 
 $$
-IQR\ Kurtosis = \frac{(Q3 - Q2) + (Q2 - Q1)}{Q3 - Q1}
+IQR\ Kurtosis = \frac{Q3 - Q1}{2*(C90 - C10)}
 $$
 
 Where:
 - $Q1$ is the first quartile (25th percentile),
-- $Q2$ is the median (50th percentile),
-- $Q3$ is the third quartile (75th percentile).
+- $Q3$ is the third quartile (75th percentile),
+- $C90$ is the 90th percentile,
+- $C10$ is the 10th percentile.
 
 **Interpretation**:
 
@@ -1244,8 +1375,17 @@ Try to calculate the IQR Kurtosis coefficient for the sample data:
 
 ```python
 mydata = [3, 7, 8, 5, 12, 14, 21, 13, 18]
-# Your code here
+Q1 = np.percentile(mydata, 25)
+Q3 = np.percentile(mydata, 75)
+C90 = np.percentile(mydata, 90)
+C10 = np.percentile(mydata, 10)
+
+IQR_Kurtosis = (Q3 - Q1) / (2 * (C90 - C10))
+print("IQR Kurtosis coefficient for mydata:", IQR_Kurtosis)
 ```
+
+    IQR Kurtosis coefficient for mydata: 0.24999999999999997
+
 
 ## Summary statistics
 
@@ -1418,13 +1558,13 @@ plt.show()
 
 
     
-![png](Exercise8_files/Exercise8_101_0.png)
+![png](Exercise8_files/output_105_0.png)
     
 
 
 
     
-![png](Exercise8_files/Exercise8_101_1.png)
+![png](Exercise8_files/output_105_1.png)
     
 
 
