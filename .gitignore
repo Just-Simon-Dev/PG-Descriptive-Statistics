@@ -173,3 +173,4 @@ cython_debug/
 
 # Some apple files metadata
 .DS_Store
+dfcorrs/
