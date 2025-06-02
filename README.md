@@ -25,3 +25,6 @@
 
 ## report 6
 - ### [report 6 - Exercise 9](https://github.com/Just-Simon-Dev/PG-Descriptive-Statistics/blob/main/report-6/Exercise9.md)
+
+## report 7
+- ### [report 7 - Exercise 10](https://github.com/Just-Simon-Dev/PG-Descriptive-Statistics/blob/main/report-7/Exercise10.md)
